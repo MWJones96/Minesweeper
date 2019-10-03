@@ -1,1 +1,1 @@
-Minesweeper
+Minesweeper made using Swing MVC

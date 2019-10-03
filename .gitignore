@@ -21,3 +21,7 @@
 
 # Virtual Machine crash logs
 hs_err_pid*
+
+# Folders
+bin/
+.vscode/
