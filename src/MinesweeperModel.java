@@ -2,7 +2,7 @@
 // and that is it. It doesn't know the View 
 // exists
 
-public class CalculatorModel {
+public class MinesweeperModel {
 
 	// Holds the value of the sum of the numbers
 	// entered in the view
