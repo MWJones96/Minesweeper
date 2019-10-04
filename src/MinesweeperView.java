@@ -12,7 +12,7 @@ public class MinesweeperView extends JFrame {
 
 		this.setTitle("Minesweeper");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(640, 640);
+		this.setSize(16 * 10 + 24, 99 + (10 * 16));
 		this.setResizable(false);
 		this.add(calcPanel);
 
