@@ -8,8 +8,7 @@ public class MinesweeperView extends JFrame {
 
 	MinesweeperView() {
 		// Sets up the view and adds the components
-		JPanel calcPanel = new JPanel();
-		calcPanel.setLayout(new GridLayout(10, 10));
+		MinesweeperPanel calcPanel = new MinesweeperPanel();
 
 		this.setTitle("Minesweeper");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
