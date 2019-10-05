@@ -4,33 +4,25 @@ import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class MinesweeperView extends JFrame {
-	private JButton calculateButton = new JButton("Calculate");
+	private MinesweeperPanel msPanel;
 
-	MinesweeperView() {
-		// Sets up the view and adds the components
-		MinesweeperPanel calcPanel = new MinesweeperPanel();
+	public MinesweeperView() {
+		this.msPanel = new MinesweeperPanel();
 
 		this.setTitle("Minesweeper");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(16 * 10 + 24, 99 + (10 * 16));
 		this.setResizable(false);
-		this.add(calcPanel);
+		this.add(msPanel);
 
 		this.setLocationRelativeTo(null);
 	}
 
-	void addCalculateListener(ActionListener listenForCalcButton) {
-
-		calculateButton.addActionListener(listenForCalcButton);
-
+	public MinesweeperGridButton[][] getButtons() {
+		return msPanel.getButtons();
 	}
 
-	// Open a popup that contains the error message passed
-
-	void displayErrorMessage(String errorMessage) {
-
-		JOptionPane.showMessageDialog(this, errorMessage);
-
+	public void drawGrid(int[][] grid) {
+		msPanel.drawGrid(grid);
 	}
-
 }

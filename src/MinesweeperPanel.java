@@ -3,12 +3,17 @@ import java.awt.image.BufferedImage;
 import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import javax.swing.JButton;
 
 @SuppressWarnings("serial")
 public class MinesweeperPanel extends JPanel {
+
+    private MinesweeperGridButton[][] buttons;
+
     private static BufferedImage frame1;
     private static BufferedImage frame2;
     private static BufferedImage frame3;
@@ -28,6 +33,13 @@ public class MinesweeperPanel extends JPanel {
     private static BufferedImage coveredSquare;
 
     public MinesweeperPanel(){
+        buttons = new MinesweeperGridButton[10][10];
+        for (int row = 0; row < 10; row++) {
+            for (int col = 0; col < 10; col++) {
+                buttons[row][col] = new MinesweeperGridButton(row, col);
+            }
+        }
+
         try {
             frame1 = ImageIO.read(new File("res/frame_1.png"));
             frame2 = ImageIO.read(new File("res/frame_2.png"));
@@ -55,7 +67,6 @@ public class MinesweeperPanel extends JPanel {
     public void paint(Graphics g) {
         super.paint(g);
         setBackground(Color.LIGHT_GRAY);
-
         g.drawImage(frame1, 0, 0, this);
 
         for (int i = 0; i < 16 * 10; i++) {
@@ -82,7 +93,8 @@ public class MinesweeperPanel extends JPanel {
 
         for (int row = 0; row < 10; row++) {
             for (int col = 0; col < 10; col++) {
-                g.drawImage(coveredSquare, 13 + 16*col, 11 + 16*row + off, this);
+                buttons[row][col].setBounds(13 + 16*col, 11 + 16*row + off, 16, 16);
+                this.add(buttons[row][col]);
             }
         }
 
@@ -113,5 +125,18 @@ public class MinesweeperPanel extends JPanel {
         g.drawImage(digit0, 16 * 10 + 7 - 41 + 2 + 11 + 2 + 11 + 2, 11 + 7, this);
 
         g.drawImage(happyFace, ((16 * 10 + 24) / 2) - 13, 57 / 2 - 13, this);
+    }
+
+    public void drawGrid(int[][] grid) {
+        for (int row = 0; row < grid.length; row++) {
+            for (int col = 0; col < grid[row].length; col++) {
+                if (grid[row][col] != buttons[row][col].getState())
+                    buttons[row][col].setState(grid[row][col]);
+            }
+        }
+    }
+
+    public MinesweeperGridButton[][] getButtons() {
+        return this.buttons;
     }
 }
