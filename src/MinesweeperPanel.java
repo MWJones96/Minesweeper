@@ -30,7 +30,8 @@ public class MinesweeperPanel extends JPanel {
     private static BufferedImage digit0;
     private static BufferedImage happyFace;
     private static BufferedImage numberDisplay;
-    private static BufferedImage coveredSquare;
+
+    private boolean needRedraw = true;
 
     public MinesweeperPanel(){
         buttons = new MinesweeperGridButton[10][10];
@@ -57,15 +58,15 @@ public class MinesweeperPanel extends JPanel {
             digit0 = ImageIO.read(new File("res/digit_0.png"));
             happyFace = ImageIO.read(new File("res/button_smile.png"));
             numberDisplay = ImageIO.read(new File("res/number_display.png"));
-            coveredSquare = ImageIO.read(new File("res/tile_covered.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void paint(Graphics g) {
-        super.paint(g);
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
         setBackground(Color.LIGHT_GRAY);
         g.drawImage(frame1, 0, 0, this);
 
@@ -130,8 +131,7 @@ public class MinesweeperPanel extends JPanel {
     public void drawGrid(int[][] grid) {
         for (int row = 0; row < grid.length; row++) {
             for (int col = 0; col < grid[row].length; col++) {
-                if (grid[row][col] != buttons[row][col].getState())
-                    buttons[row][col].setState(grid[row][col]);
+                buttons[row][col].setState(grid[row][col]);
             }
         }
     }

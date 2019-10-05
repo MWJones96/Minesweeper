@@ -30,21 +30,18 @@ public class MinesweeperController {
 
         @Override
         public void mousePressed(MouseEvent e) {
-            //MinesweeperGridButton b = (MinesweeperGridButton) e.getComponent();
+            MinesweeperGridButton b = (MinesweeperGridButton) e.getComponent();
+            System.out.println("Press");
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
             MinesweeperGridButton b = (MinesweeperGridButton) e.getComponent();
+            m.clickSquare(b.getRow(), b.getCol());
 
-            if (SwingUtilities.isRightMouseButton(e)) {
-                System.out.println("Right click released!");
-                if (b.getState() == -1) {
-                    b.setState(10);
-                }
-            } else {
-                v.drawGrid(m.getGameState());
-            }
+            m.printState();
+            v.drawGrid(m.getGameState());
+            System.out.println("Release");
         }
 
         @Override
