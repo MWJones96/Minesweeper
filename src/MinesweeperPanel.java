@@ -31,8 +31,6 @@ public class MinesweeperPanel extends JPanel {
     private static BufferedImage happyFace;
     private static BufferedImage numberDisplay;
 
-    private boolean needRedraw = true;
-
     public MinesweeperPanel(){
         buttons = new MinesweeperGridButton[10][10];
         for (int row = 0; row < 10; row++) {
@@ -67,6 +65,10 @@ public class MinesweeperPanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
+        int off = 11 + 35;
+
+        System.out.println("Paint");
+
         setBackground(Color.LIGHT_GRAY);
         g.drawImage(frame1, 0, 0, this);
 
@@ -84,20 +86,11 @@ public class MinesweeperPanel extends JPanel {
             g.drawImage(frame5, 12 + 16 * 10, 11 + i, this);
         }
 
-        int off = 11 + 35;
-
         g.drawImage(frame6, 0, off, this);
         for (int i = 0; i < 10 * 16; i++) {
             g.drawImage(frame7, 12 + i, off, this);
         }
         g.drawImage(frame8, 10 * 16 + 12, off, this);
-
-        for (int row = 0; row < 10; row++) {
-            for (int col = 0; col < 10; col++) {
-                buttons[row][col].setBounds(13 + 16*col, 11 + 16*row + off, 16, 16);
-                this.add(buttons[row][col]);
-            }
-        }
 
         for (int i = 0; i < 10 * 16; i++) {
             g.drawImage(frame9, 0, 11 + i + off, this);
@@ -126,6 +119,14 @@ public class MinesweeperPanel extends JPanel {
         g.drawImage(digit0, 16 * 10 + 7 - 41 + 2 + 11 + 2 + 11 + 2, 11 + 7, this);
 
         g.drawImage(happyFace, ((16 * 10 + 24) / 2) - 13, 57 / 2 - 13, this);
+
+        for (int row = 0; row < 10; row++) {
+            for (int col = 0; col < 10; col++) {
+                buttons[row][col].setBounds(13 + 16*col, 11 + 16*row + off, 16, 16);
+                this.add(buttons[row][col]);
+            }
+        }
+
     }
 
     public void drawGrid(int[][] grid) {
@@ -134,6 +135,8 @@ public class MinesweeperPanel extends JPanel {
                 buttons[row][col].setState(grid[row][col]);
             }
         }
+
+        repaint();
     }
 
     public MinesweeperGridButton[][] getButtons() {

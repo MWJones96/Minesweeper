@@ -17,6 +17,7 @@ public class MinesweeperGridButton extends JButton {
     private static ImageIcon tileMine = new ImageIcon("res/tile_mine.png");
     private static ImageIcon tileMineClicked = new ImageIcon("res/tile_mine_clicked.png");
     private static ImageIcon tileQuestion = new ImageIcon("res/tile_question.png");
+    private static ImageIcon tileCross = new ImageIcon("res/tile_cross.png");
 
     private int row;
     private int col;
@@ -47,10 +48,11 @@ public class MinesweeperGridButton extends JButton {
             case 6: this.setIcon(tile6); break;
             case 7: this.setIcon(tile7); break;
             case 8: this.setIcon(tile8); break;
-            case 10: this.setIcon(tileFlag); break;
-            case 11: this.setIcon(tileMine); break;
-            case 12: this.setIcon(tileMineClicked); break;
-            case 13: this.setIcon(tileQuestion); break;
+            case 9: this.setIcon(tileFlag); break;
+            case 10: this.setIcon(tileMine); break;
+            case 11: this.setIcon(tileMineClicked); break;
+            case 12: this.setIcon(tileQuestion); break;
+            case 13: this.setIcon(tileCross); break;
         }
     }
 

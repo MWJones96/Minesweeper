@@ -55,16 +55,43 @@ public class MinesweeperModel {
 		}
 	}
 
+	public void revealGrid() {
+		for (int row = 0; row < 10; row++) {
+			for (int col = 0; col < 10; col++) {
+				if (mines[row][col]) {
+					if (gameState[row][col] == -1 || gameState[row][col] == 12)
+						gameState[row][col] = 10;
+				} else {
+					if (gameState[row][col] == 9)
+						gameState[row][col] = 13;
+				}
+			}
+		}
+	}
+
 	public void clickSquare(int row, int col) {
 		if (isGameOver || gameState[row][col] >= 0) {
 			return;
 		}
 
 		if (mines[row][col]) {
-			gameState[row][col] = 12;
+			gameState[row][col] = 11;
 			isGameOver = true;
+			revealGrid();
 		} else {
 			floodFill(row, col);
+		}
+	}
+
+	public void rightClickSquare(int row, int col) {
+		if (isGameOver || (gameState[row][col] >= 0 && gameState[row][col] < 9)) {
+			return;
+		}
+
+		switch(gameState[row][col]) {
+			case -1: gameState[row][col] = 9; break;
+			case 9: gameState[row][col] = 12; break;
+			case 12: gameState[row][col] = -1; break;
 		}
 	}
 
